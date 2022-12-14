@@ -20,7 +20,8 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
             'gender' => 'male',
             'dob' => '1990-01-01',
-            'country' => 'United States'
+            'country' => 'United States',
+            'role' => 'member'
         ]);
         User::create([
             'name' => 'Jane Doe',
@@ -28,7 +29,9 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
             'gender' => 'female',
             'dob' => '1990-01-01',
-            'country' => 'United States'
+            'country' => 'United States',
+            'role' => 'member'
+
         ]);
         User::create([
             'name' => 'John Smith',
@@ -36,7 +39,19 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
             'gender' => 'male',
             'dob' => '1990-01-01',
-            'country' => 'United States'
+            'country' => 'United States',
+            'role' => 'member'
+
+        ]);
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
+            'gender' => 'male',
+            'dob' => '1990-01-01',
+            'country' => 'United States',
+            'role' => 'admin'
+
         ]);
     }
 }

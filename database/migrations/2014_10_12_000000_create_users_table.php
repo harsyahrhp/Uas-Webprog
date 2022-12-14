@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('gender')->between('male', 'female');
             $table->date('dob');
             $table->string('country');
+            $table->string('role')->nullable();
             $table->timestamps();
         });
     }
