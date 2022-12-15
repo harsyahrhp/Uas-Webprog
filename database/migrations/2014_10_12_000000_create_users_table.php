@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->date('dob');
             $table->string('country');
             $table->string('role')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -20,7 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('price');
-            $table->string('photoPath');
+            $table->string('photo_path');
+            $table->boolean('is_deleted')->default(false);
         });
     }
 
