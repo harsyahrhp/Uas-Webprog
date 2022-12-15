@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
             'gender' => 'male',
             'dob' => '1990-01-01',
             'country' => 'United States',
-            'role' => 'member'
         ]);
         User::create([
             'name' => 'Jane Doe',
@@ -30,7 +29,6 @@ class UserSeeder extends Seeder
             'gender' => 'female',
             'dob' => '1990-01-01',
             'country' => 'United States',
-            'role' => 'member'
 
         ]);
         User::create([
@@ -40,7 +38,6 @@ class UserSeeder extends Seeder
             'gender' => 'male',
             'dob' => '1990-01-01',
             'country' => 'United States',
-            'role' => 'member'
 
         ]);
         User::create([
@@ -51,7 +48,6 @@ class UserSeeder extends Seeder
             'dob' => '1990-01-01',
             'country' => 'United States',
             'role' => 'admin'
-
         ]);
     }
 }

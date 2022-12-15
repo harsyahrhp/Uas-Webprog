@@ -11,7 +11,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
+        <div class="container-fluid px-5">
             <a class="navbar-brand" href="#">Barbatos Shop</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -30,9 +30,53 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                <ul class="d-flex navbar-nav ">
+                    @auth
+                    @if (Auth::user()->role == 'admin')
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false"
+                            data-bs-toggle="dropdown">
+                            {{Auth::user()->name}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    @elseif (Auth::user()->role == 'member')
+                    <li class="nav-item">
+                        <a class="nav-link " href="#" role="button" aria-expanded="false">
+                            <img src="{{asset('general/cart.svg')}}" alt="cart" width="24">
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false"
+                            data-bs-toggle="dropdown">
+                            {{Auth::user()->name}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+
+                    </li>
+                    @endif
+                    @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Register</a>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </div>
