@@ -36,7 +36,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false"
                             data-bs-toggle="dropdown">
-                            {{Auth::user()->name}}
+                            {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Action</a></li>
@@ -50,13 +50,13 @@
                     @elseif (Auth::user()->role == 'member')
                     <li class="nav-item">
                         <a class="nav-link " href="#" role="button" aria-expanded="false">
-                            <img src="{{asset('general/cart.svg')}}" alt="cart" width="24">
+                            <img src="{{ asset('general/cart.svg') }}" alt="cart" width="24">
                         </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false"
                             data-bs-toggle="dropdown">
-                            {{Auth::user()->name}}
+                            {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Action</a></li>
