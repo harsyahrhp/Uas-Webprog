@@ -18,6 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//login
 Route::get('/login', [AuthController::class, 'loginPage']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+//register
+Route::get('/register', [AuthController::class, 'registerPage']);
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
