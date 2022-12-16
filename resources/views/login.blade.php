@@ -4,13 +4,6 @@
 
 @section('content')
 
-@auth
-<div>Hi, {{ Auth::user() }}</div>
-<form action="/logout" method="POST">
-    @csrf
-    <input type="submit" value="Logout">
-</form>
-@else
 <div class="container-sm d-flex flex-column flex-wrap gap-4 justify-content-center align-items-center my-5">
     <div class=" shadow-lg justify-content-center d-flex flex-column align-items-center" style="width: 50vw">
         <div class="display-4 m-2">Login</div>
@@ -34,11 +27,9 @@
             </div>
             <button type="submit" class="btn btn-primary" value="Login">Login</button>
 
-            <div class="mt-5">Doesn't have an account? <a href="#">Register here!</a></div>
+            <div class="mt-5">Doesn't have an account? <a href="/register">Register here!</a></div>
         </form>
     </div>
 </div>
-
-@endif
 
 @endsection
