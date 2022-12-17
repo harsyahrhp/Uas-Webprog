@@ -3,23 +3,28 @@
 @section('title', 'Home')
 
 @section('content')
-    <h1 class="d-flex justify-content-center mb-3 mt-3">Post</h1>
-    <div class="container-sm d-flex flex-column flex-wrap gap-4 justify-content-center align-items-center ">
-        <div class="row row-cols-3 gap-5">
-            {{-- @foreach ($posts as $p)
-                <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="width: 24rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $p->title }}</h5>
-                        <p class="card-text">{{ $p->text }}</p>
-                        <hr>
-                        <p class="date">{{ $p->created_at }}</p>
-                    </div>
-                </div>
-            @endforeach --}}
-        </div>
-        <div style="margin: 2rem">
-            {{-- {{ $posts->links() }} --}}
-        </div>
-    </div>
 
+@foreach ($categories as $category)
+<h1>{{$category->name}}</h1>
+<div class="d-flex flex-row flex-nowrap overflow-auto">
+    <div class="d-flex flex-row flex-nowrap">
+        @foreach ($category->products as $product)
+        <div class="col">
+            <div class="card" style=" width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{$product->name}}</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional
+                        content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+@endforeach
 @endsection

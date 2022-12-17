@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//auth
 
 //login
 Route::get('/login', [AuthController::class, 'loginPage']);
@@ -26,5 +25,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'registerPage']);
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//home
+Route::get('/', [ProductController::class, 'index']);
