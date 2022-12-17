@@ -3,23 +3,35 @@
 @section('title', 'Home')
 
 @section('content')
-    <h1 class="d-flex justify-content-center mb-3 mt-3">Post</h1>
-    <div class="container-sm d-flex flex-column flex-wrap gap-4 justify-content-center align-items-center ">
-        <div class="row row-cols-3 gap-5">
-            {{-- @foreach ($posts as $p)
-                <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="width: 24rem;">
+<form class="d-flex mb-5" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-secondary" type="submit">Search</button>
+</form>
+
+@foreach ($categories as $category)
+<div style="background: #ededed " class="p-5 pt-3 mb-5">
+
+    <div class="display-5">{{$category->name}}</div>
+    <a class="display-10" href="#">See more</a>
+
+    <div class="d-flex flex-row flex-nowrap overflow-auto">
+        <div class="d-flex flex-row flex-nowrap" style="gap: 2rem">
+
+            @foreach ($category->products as $product)
+            <div class="col">
+                <div class="card h-100" style="width: 18rem; overflow: hidden;">
+                    <img src="{{ asset('product/' . $product->photo_path) }}" class="card-img-top" alt={{ $product->name
+                    }} style="width: 18rem; height:18rem">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $p->title }}</h5>
-                        <p class="card-text">{{ $p->text }}</p>
-                        <hr>
-                        <p class="date">{{ $p->created_at }}</p>
+                        <p class="card-text">{{ $product->name }}</p>
+                        <p class="card-text"><b>{{ 'Rp. ' . $product->price }}</b></p>
                     </div>
                 </div>
-            @endforeach --}}
-        </div>
-        <div style="margin: 2rem">
-            {{-- {{ $posts->links() }} --}}
+            </div>
+            @endforeach
+
         </div>
     </div>
-
+</div>
+@endforeach
 @endsection
