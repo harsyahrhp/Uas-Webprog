@@ -3,27 +3,34 @@
 @section('title', 'Home')
 
 @section('content')
+<form class="d-flex mb-5" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-secondary" type="submit">Search</button>
+</form>
 
 @foreach ($categories as $category)
-<h1>{{$category->name}}</h1>
-<div class="d-flex flex-row flex-nowrap overflow-auto">
-    <div class="d-flex flex-row flex-nowrap">
-        @foreach ($category->products as $product)
-        <div class="col">
-            <div class="card" style=" width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{$product->name}}</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional
-                        content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+<div style="background: #ededed " class="p-5 pt-3 mb-5">
+
+    <div class="display-5">{{$category->name}}</div>
+    <a class="display-10" href="#">See more</a>
+
+    <div class="d-flex flex-row flex-nowrap overflow-auto">
+        <div class="d-flex flex-row flex-nowrap" style="gap: 2rem">
+
+            @foreach ($category->products as $product)
+            <div class="col">
+                <div class="card h-100" style="width: 18rem; overflow: hidden;">
+                    <img src="{{ asset('product/' . $product->photo_path) }}" class="card-img-top" alt={{ $product->name
+                    }} style="width: 18rem; height:18rem">
+                    <div class="card-body">
+                        <p class="card-text">{{ $product->name }}</p>
+                        <p class="card-text"><b>{{ 'Rp. ' . $product->price }}</b></p>
+                    </div>
                 </div>
             </div>
+            @endforeach
+
         </div>
-        @endforeach
     </div>
 </div>
 @endforeach
