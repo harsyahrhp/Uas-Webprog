@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,13 +10,16 @@ use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
+
     public function loginPage()
     {
-        return view('login');
+        $categories = Category::all();
+        return view('login', compact('categories'));
     }
 
     public function login(Request $request)
     {
+        $categories = Category::all();
 
         $validateCredentials = $request->validate([
             'email' => 'required|email|max:255',
@@ -27,7 +31,7 @@ class AuthController extends Controller
             Cookie::queue('password_cookie', $request->password, 120);
         }
         if (Auth::attempt($validateCredentials, true)) {
-            return redirect('/');
+            return view('welcome', compact('categories'));
         }
 
         return redirect()->back()->withErrors(['auth' => 'Invalid email or password']);
@@ -41,11 +45,13 @@ class AuthController extends Controller
 
     public function registerPage()
     {
-        return view('register');
+        $categories = Category::all();
+        return view('register', compact('categories'));
     }
 
     public function register(Request $request)
     {
+        $categories = Category::all();
 
         $validateCredentials = $request->validate([
             'name' => 'required|min:5',
@@ -70,6 +76,6 @@ class AuthController extends Controller
             return redirect()->back()->withErrors(['auth' => 'Email already exists']);
         }
 
-        return redirect('/login');
+        return redirect('/login', compact('categories'));
     }
 }
