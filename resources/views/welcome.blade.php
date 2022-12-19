@@ -18,16 +18,16 @@
         <div class="d-flex flex-row flex-nowrap" style="gap: 2rem">
 
             @foreach ($category->products as $product)
-            <div class="col">
+            <a class="col" href="/product/{{$product->id}}" style="text-decoration: none">
                 <div class="card h-100" style="width: 18rem; overflow: hidden;">
                     <img src="{{ asset('product/' . $product->photo_path) }}" class="card-img-top" alt={{ $product->name
                     }} style="width: 18rem; height:18rem">
                     <div class="card-body">
-                        <p class="card-text">{{ $product->name }}</p>
-                        <p class="card-text"><b>{{ 'Rp. ' . $product->price }}</b></p>
+                        <p class="card-text" style="color: black">{{ $product->name }}</p>
+                        <p class="card-text" style="color: black"><b>{{ 'Rp. ' . $product->price }}</b></p>
                     </div>
                 </div>
-            </div>
+            </a>
             @endforeach
 
         </div>

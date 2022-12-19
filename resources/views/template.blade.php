@@ -54,12 +54,10 @@
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <form action="/logout" method="POST">
+                                @csrf
+                                <input class="dropdown-item" type="submit" value="Logout">
+                            </form>
                         </ul>
 
                     </li>

@@ -5,21 +5,21 @@
 @section('content')
 
 <div class="display-5 mb-5">{{$categoryName}}</div>
-<div class="d-flex flex-column">
+<div class="d-flex flex-column" style="min-height: 500vh">
 
     <div class="row row-cols-1 row-cols-md-5 g-4 p-5" style="background: #e6e6e6">
 
         @foreach ($products as $product)
-        <div class="col">
+        <a class="col" style="text-decoration: none" href="/product/{{$product->id}}">
             <div class="card h-100" style="width: 12rem; overflow: hidden">
                 <img src="{{ asset('product/' . $product->photo_path) }}" class="card-img-top" alt={{ $product->name
                 }} style="width: 12rem; height:12rem">
                 <div class="card-body">
-                    <p class="card-text">{{ $product->name }}</p>
-                    <p class="card-text"><b>{{ 'Rp. ' . $product->price }}</b></p>
+                    <p class="card-text" style="color: black">{{ $product->name }}</p>
+                    <p class="card-text" style="color: black"><b>{{ 'Rp. ' . $product->price }}</b></p>
                 </div>
             </div>
-        </div>
+        </a>
         @endforeach
 
     </div>
