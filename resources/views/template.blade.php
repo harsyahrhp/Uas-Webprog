@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid px-5">
-            <a class="navbar-brand" href="#">Barbatos Shop</a>
+            <a class="navbar-brand" href="/">Barbatos Shop</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
@@ -69,7 +69,7 @@
                         <a class="nav-link" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="/register">Register</a>
                     </li>
                     @endif
                 </ul>
