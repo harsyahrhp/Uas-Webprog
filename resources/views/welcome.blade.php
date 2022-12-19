@@ -12,7 +12,7 @@
 <div style="background: #ededed " class="p-5 pt-3 mb-5">
 
     <div class="display-5">{{$category->name}}</div>
-    <a class="display-10" href="#">See more</a>
+    <a class="display-10" href="/category/{{$category->id}}">See more</a>
 
     <div class="d-flex flex-row flex-nowrap overflow-auto">
         <div class="d-flex flex-row flex-nowrap" style="gap: 2rem">

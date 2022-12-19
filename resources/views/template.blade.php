@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid px-5">
-            <a class="navbar-brand" href="#">Barbatos Shop</a>
+            <a class="navbar-brand" href="/">Barbatos Shop</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
@@ -21,30 +21,25 @@
                             Category
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            @foreach ($categories as $category)
+                            <li><a class="dropdown-item" href="/category/{{$category->id}}">{{$category->name}}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                 </ul>
                 <ul class="d-flex navbar-nav ">
                     @auth
                     @if (Auth::user()->role == 'admin')
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false"
+                    <li class="nav-item dropdown dropstart">
+                        <a class="nav-link dropdown-toggle" role="button" aria-expanded="false"
                             data-bs-toggle="dropdown">
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <form action="/logout" method="POST">
+                                @csrf
+                                <input class="dropdown-item" type="submit" value="Logout">
+                            </form>
                         </ul>
                     </li>
                     @elseif (Auth::user()->role == 'member')
@@ -74,7 +69,7 @@
                         <a class="nav-link" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="/register">Register</a>
                     </li>
                     @endif
                 </ul>

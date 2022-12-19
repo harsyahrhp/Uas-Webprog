@@ -185,5 +185,38 @@ class ProductSeeder extends Seeder
             'price' => 50000,
             'photo_path' => 'skin-ker6.jpg',
         ]);
+
+        Product::create([
+            'name' => 'Blender tak bermerek ',
+            'category_id' => 1,
+            'description' => 'Blender tak bermerek dapat membantu anda dalam memotong dan menghaluskan bahan makanan dengan mudah dan cepat tanpa perlu repot untuk mencuci blender. Blender ini juga dapat digunakan untuk membuat jus dan smoothies serta membuat ice cream yang dapat menyenangkan seluruh anggota keluarga anda.',
+            'price' => 2300000,
+            'photo_path' => 'blender-tak.webp',
+        ]);
+
+        Product::create([
+            'name' => 'Kipas Angin',
+            'category_id' => 1,
+            'description' => 'Kipas angin dapat membantu anda dalam mendinginkan ruangan anda agar dapat terasa lebih sejuk santai. Kipas angin ini juga dapat digunakan untuk menghangatkan ruangan anda agar dapat terasa lebih hangat dan nyaman. Kipas ini juga dilengkapi dengan teknologi inverter yang dapat membersihkan udara dari debu dan kotoran yang dapat menyebabkan penyakit.',
+            'price' => 3000000,
+            'photo_path' => 'kipas-angin.webp',
+        ]);
+
+        Product::create([
+            'name' => 'Speaker Poly',
+            'category_id' => 1,
+            'description' => 'Speaker Poly dapat membantu anda dalam mendengarkan musik dengan kualitas suara yang sangat baik. Speaker ini juga dapat digunakan untuk mendengarkan musik dengan kualitas suara yang sangat baik. Speaker ini juga dilengkapi dengan teknologi dolby atmos untuk suara yang lebih nyata dan menggelegar.',
+            'price' => 5000000,
+            'photo_path' => 'speaker-poly.webp',
+        ]);
+
+
+        Product::create([
+            'name' => 'Oven Toaster',
+            'category_id' => 1,
+            'description' => 'Oven toaster dapat membantu anda dalam memanggang makanan dengan mudah dan cepat tanpa perlu repot untuk mencuci oven. Oven toaster ini juga dapat digunakan untuk membuat roti dan kue yang dapat menyenangkan seluruh anggota keluarga anda.',
+            'price' => 10000000,
+            'photo_path' => 'oven-toaster.webp',
+        ]);
     }
 }

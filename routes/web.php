@@ -29,3 +29,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //home
 Route::get('/', [ProductController::class, 'index']);
+
+//product by category
+Route::get('/category/{id}', [ProductController::class, 'categoryProduct']);
