@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title', 'Home')
+@section('title', $product->name.' details')
 
 @section('content')
 
@@ -24,7 +24,7 @@
                 </div>
                 @auth
                 @if (Auth::user()->role == 'member')
-                <form action="" class="d-flex flex-column">
+                <form action="/product/{{$product->id}}" class="d-flex flex-column" method="POST">
                     @csrf
                     <div class="d-flex flex-row mb-5">
                         <div class="me-5" style="color: #747474">Qty</div>
