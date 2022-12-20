@@ -9,7 +9,7 @@
     <div class="d-flex flex-row g-4 p-5 justify-content-center" style="background: #e6e6e6;">
         <div class="rounded-5">
             <img src="{{ asset('product/' . $product->photo_path) }}" class=" img-fluid rounded-start"
-                style="width: 36rem; max-height: 36rem;">
+                style="width: 48rem; max-height: 48rem;">
         </div>
         <div class="rounded-end p-5" style="background: #f7f7f7">
             <div class="card-body">

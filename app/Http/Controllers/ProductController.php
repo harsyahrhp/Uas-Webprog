@@ -49,4 +49,15 @@ class ProductController extends Controller
         }
         return redirect()->back()->with('alert', 'Added to cart');
     }
+
+
+    public function search(Request $request)
+    {
+        $validateCredentials = $request->validate([
+            'search' => 'required',
+        ]);
+        $categories = Category::all();
+        $products = Product::where('name', 'like', '%' . $request->search . '%')->paginate(10)->withQueryString();
+        return view('search', compact('categories', 'products'));
+    }
 }
