@@ -21,4 +21,12 @@ class ProductController extends Controller
         $categoryName = Category::find($id)->name;
         return view('product_category', compact('categories', 'categoryName', 'products'));
     }
+
+    public function productDetail($id)
+    {
+        $categories = Category::all();
+        $product = Product::find($id);
+
+        return view('product_detail', compact('categories', 'product'));
+    }
 }

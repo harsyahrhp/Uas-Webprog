@@ -32,3 +32,6 @@ Route::get('/', [ProductController::class, 'index']);
 
 //product by category
 Route::get('/category/{id}', [ProductController::class, 'categoryProduct']);
+
+//product detail
+Route::get('/product/{id}', [ProductController::class, 'productDetail']);
