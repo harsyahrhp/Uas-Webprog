@@ -3,8 +3,9 @@
 @section('title', 'Home')
 
 @section('content')
-<form class="d-flex mb-5" role="search">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+<form class="d-flex mb-5" action={{ route('search') }} method="POST">
+    @csrf
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
     <button class="btn btn-secondary" type="submit">Search</button>
 </form>
 

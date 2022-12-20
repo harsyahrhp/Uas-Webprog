@@ -36,3 +36,6 @@ Route::get('/category/{id}', [ProductController::class, 'categoryProduct']);
 //product detail
 Route::get('/product/{id}', [ProductController::class, 'productDetail']);
 Route::post('/product/{id}', [ProductController::class, 'purchase'])->middleware('auth');
+
+//search
+Route::post('/search', [ProductController::class, 'search'])->name('search');
