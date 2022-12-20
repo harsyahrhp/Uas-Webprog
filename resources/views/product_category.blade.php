@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title', 'Home')
+@section('title', $categoryName.' products')
 
 @section('content')
 
