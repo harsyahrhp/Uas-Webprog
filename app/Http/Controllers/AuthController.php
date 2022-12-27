@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
+
+    public function profileview($id){
+        $data=User::find($id);
+        $categories = Category::all();
+        return view('profile',compact('data','categories'));
+    }
 
     public function loginPage()
     {
@@ -30,7 +37,12 @@ class AuthController extends Controller
             Cookie::queue('email_cookie', $request->email, 120);
             Cookie::queue('password_cookie', $request->password, 120);
         }
+
         if (Auth::attempt($validateCredentials, true)) {
+            $usertype=Auth::user()->role;
+            if($usertype=='admin'){
+                return view('welcomeadmin', compact('categories'));
+            }
             return view('welcome', compact('categories'));
         }
 

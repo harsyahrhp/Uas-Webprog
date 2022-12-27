@@ -12,7 +12,11 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid px-5">
-            <a class="navbar-brand" href="/">Barbatos Shop</a>
+            @if (Auth::user()->role == 'admin')
+            <a class="navbar-brand" href="/showproduct">Barbatos Shop</a>
+            @else
+                <a class="navbar-brand" href="/">Barbatos Shop</a>
+            @endif
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
@@ -40,11 +44,12 @@
                                 @csrf
                                 <input class="dropdown-item" type="submit" value="Logout">
                             </form>
+                            <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">Profile</a>
                         </ul>
                     </li>
                     @elseif (Auth::user()->role == 'member')
                     <li class="nav-item">
-                        <a class="nav-link " href="#" role="button" aria-expanded="false">
+                        <a class="nav-link " href="/showcart" role="button" aria-expanded="false">
                             <img src="{{ asset('general/cart.svg') }}" alt="cart" width="24">
                         </a>
                     </li>
@@ -58,6 +63,8 @@
                                 @csrf
                                 <input class="dropdown-item" type="submit" value="Logout">
                             </form>
+                            <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">Profile</a>
+                            <a class="dropdown-item" href="/showhistory/{{Auth::user()->id}}">History</a>
                         </ul>
 
                     </li>

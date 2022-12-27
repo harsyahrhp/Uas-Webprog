@@ -24,11 +24,11 @@
                 </div>
                 @auth
                 @if (Auth::user()->role == 'member')
-                <form action="/product/{{$product->id}}" class="d-flex flex-column" method="POST">
+                <form action="/addcart/{{$product->id}}" class="d-flex flex-column" method="POST">
                     @csrf
                     <div class="d-flex flex-row mb-5">
                         <div class="me-5" style="color: #747474">Qty</div>
-                        <input type="text" name="qty" id="" class="form-control">
+                        <input type="number" name="quantity" id="quantity" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-secondary" value="Purchase">Purchase</button>
                 </form>
