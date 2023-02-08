@@ -3,36 +3,22 @@
 @section('title', 'Home')
 
 @section('content')
-<form class="d-flex mb-5" action={{ route('search') }} method="POST">
-    @csrf
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-    <button class="btn btn-secondary" type="submit">Search</button>
-</form>
-
-@foreach ($categories as $category)
-<div style="background: #ededed " class="p-5 pt-3 mb-5">
-
-    <div class="display-5">{{$category->name}}</div>
-    <a class="display-10" href="/category/{{$category->id}}">See more</a>
-
-    <div class="d-flex flex-row flex-nowrap overflow-auto">
-        <div class="d-flex flex-row flex-nowrap" style="gap: 2rem">
-
-            @foreach ($category->products as $product)
-            <a class="col" href="/product/{{$product->id}}" style="text-decoration: none">
-                <div class="card h-100" style="width: 18rem; overflow: hidden;">
-                    <img src="{{ asset('product/' . $product->photo_path) }}" class="card-img-top" alt={{ $product->name
-                    }} style="width: 18rem; height:18rem">
-                    <div class="card-body">
+    <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
+        @foreach ($products as $product)
+            <div class="col" style="text-decoration: none">
+                <div class="card h-100" style="width: 12rem; overflow: hidden">
+                    <img src={{$product->image}} class="card-img-top" alt={{ $product->name }}
+                        style="width: 12rem; height:12rem">
+                    <div class="card-body text-center">
                         <p class="card-text" style="color: black">{{ $product->name }}</p>
-                        <p class="card-text" style="color: black"><b>{{ 'Rp. ' . $product->price }}</b></p>
+                        <a class="card-text" href="/product/{{ $product->id }}">Detail</a>
                     </div>
                 </div>
-            </a>
-            @endforeach
+            </div>
+        @endforeach
 
-        </div>
     </div>
-</div>
-@endforeach
+    <div style="" class="align-self-center text-center">
+        {{ $products->links() }}
+    </div>
 @endsection

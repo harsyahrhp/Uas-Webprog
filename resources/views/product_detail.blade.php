@@ -3,37 +3,29 @@
 @section('title', $product->name.' details')
 
 @section('content')
-
-<div class="d-flex flex-column" style="min-height: 500vh">
-
-    <div class="d-flex flex-row g-4 p-5 justify-content-center" style="background: #e6e6e6;">
+<div class="d-flex flex-column">
+    <div class="d-flex flex-row g-4 p-5 justify-content-center">
         <div class="rounded-5">
-            <img src="{{ asset('product/' . $product->photo_path) }}" class=" img-fluid rounded-start"
-                style="width: 48rem; max-height: 48rem;">
+            <h5 class="ms-5 font-weight-bold"><u>{{$product->name}}</u></h5>
+            <img src={{$product->image}} class=" img-fluid rounded-start"
+                style="width: 15rem; max-height: 15rem;">
         </div>
-        <div class="rounded-end p-5" style="background: #f7f7f7">
+        <div class="rounded-end p-5">
             <div class="card-body">
-                <h5 class="display-3">{{$product->name}}</h5>
+                <br>
+                <div class="d-flex flex-row mb-5 font-weight-bold">
+                    <div class="me-5 font-weight-bold">Price: </div>
+                    <div class="font-weight-bold">{{'Rp. '.number_format($product->price, 0, ',', '.').',-'}}</div>
+                </div>
                 <div style="width: 54rem" class="d-flex flex-row mb-5">
-                    <div class="me-5" style="color: #747474">Detail</div>
                     <div>{{$product->description}}</div>
                 </div>
-                <div class="d-flex flex-row mb-5">
-                    <div class="me-5" style="color: #747474">Price</div>
-                    <div>{{'IDR '.$product->price}}</div>
-                </div>
                 @auth
-                @if (Auth::user()->role == 'member')
-                <form action="/addcart/{{$product->id}}" class="d-flex flex-column" method="POST">
+                @if (Auth::user()->role != null)
+                <form action="/product/{{$product->id}}" class="d-flex flex-column" method="POST">
                     @csrf
-                    <div class="d-flex flex-row mb-5">
-                        <div class="me-5" style="color: #747474">Qty</div>
-                        <input type="number" name="quantity" id="quantity" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-secondary" value="Purchase">Purchase</button>
+                    <button type="submit" class="btn btn-warning" value="Purchase">Buy</button>
                 </form>
-
-
                 @endif
                 @endauth
 

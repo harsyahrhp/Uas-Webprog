@@ -15,39 +15,13 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'John Doe',
-            'email' => 'john.doe@email.com',
-            'password' => bcrypt('password'),
-            'gender' => 'male',
-            'dob' => '1990-01-01',
-            'country' => 'United States',
-        ]);
-        User::create([
-            'name' => 'Jane Doe',
-            'email' => 'janedoe@email.com',
-            'password' => bcrypt('password'),
-            'gender' => 'female',
-            'dob' => '1990-01-01',
-            'country' => 'United States',
-
-        ]);
-        User::create([
-            'name' => 'John Smith',
-            'email' => 'john.smith@email.com',
-            'password' => bcrypt('password'),
-            'gender' => 'male',
-            'dob' => '1990-01-01',
-            'country' => 'United States',
-
-        ]);
-        User::create([
-            'name' => 'admin',
+            'first_name' => 'admin',
+            'last_name' => ' ',
             'email' => 'admin@admin.com',
-            'password' => bcrypt('admin'),
+            'display_picture_link' => 'administrator.png',
+            'password' => bcrypt('admin123'),
             'gender' => 'male',
-            'dob' => '1990-01-01',
-            'country' => 'United States',
-            'role' => 'admin'
+            'role' => 'Admin',
         ]);
     }
 }

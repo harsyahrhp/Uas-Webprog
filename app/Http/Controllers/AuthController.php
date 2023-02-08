@@ -2,32 +2,62 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Hash;
 class AuthController extends Controller
 {
 
-    public function profileview($id){
-        $data=User::find($id);
-        $categories = Category::all();
-        return view('profile',compact('data','categories'));
+    public function profilePage()
+    {
+        $data = Auth::user();
+        return view('profile', compact('data'));
+    }
+    public function register(Request $request)
+    {
+        $validateCredentials = $request->validate([
+            'name' => 'required|max:25',
+            'lname' => 'required|max:25',
+            'email' => 'required|email',
+            'role' => 'required',
+            'gender' => 'required',
+            'file' => 'required|mimes:jpeg,jpg,png',
+            'password' => 'required|min:8|regex:/[0-9]/',
+            'confirmPassword' => 'required|same:password',
+        ]);
+        $user = new User();
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $request->file->move(public_path('image'), $fileName);
+            $user->display_picture_link = $fileName;
+        }
+        $user->first_name = $request->name;
+        $user->last_name = $request->lname;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->gender = $request->gender;
+        $user->role = $request->role;
+        try {
+            $user->save();
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['auth' => 'Email already exists']);
+        }
+
+        return redirect('/login');
     }
 
     public function loginPage()
     {
-        $categories = Category::all();
-        return view('login', compact('categories'));
+        return view('login');
     }
 
     public function login(Request $request)
     {
-        $categories = Category::all();
-
         $validateCredentials = $request->validate([
             'email' => 'required|email|max:255',
             'password' => 'required',
@@ -39,55 +69,51 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt($validateCredentials, true)) {
-            $usertype=Auth::user()->role;
-            if($usertype=='admin'){
-                return view('welcomeadmin', compact('categories'));
-            }
-            return view('welcome', compact('categories'));
+            $products = DB::table('products')->paginate(10);
+            return view('welcome', compact('products'));
         }
 
-        return redirect()->back()->withErrors(['auth' => 'Invalid email or password']);
+        return redirect()->back()->withErrors(['auth' => 'Wrong Email/Password. Please Check Again']);
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect()->back();
+        return view('logout');
     }
 
     public function registerPage()
     {
-        $categories = Category::all();
-        return view('register', compact('categories'));
+        return view('register');
     }
 
-    public function register(Request $request)
+
+    public function update(Request $request, $id)
     {
-        $categories = Category::all();
-
         $validateCredentials = $request->validate([
-            'name' => 'required|min:5',
+            'name' => 'required|max:25',
+            'lname' => 'required|max:25',
             'email' => 'required|email',
-            'password' => 'required|min:8',
-            'confirmPassword' => 'required|same:password',
             'gender' => 'required',
-            'date' => 'required|date|before:today|after:1900-01-01',
-            'country' => 'required',
+            'file' => 'mimes:jpeg,jpg,png',
+            'password' => 'required|min:8|regex:/[0-9]/',
+            'confirmPassword' => 'required|same:password',
         ]);
-
-        $user = new User();
-        $user->name = $request->name;
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $request->file->move(public_path('image'), $fileName);
+            $user->display_picture_link = $fileName;
+        }
+        $user = User::find($id);
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->withErrors(['auth' => 'password incorrect']);
+        }
+        $user->first_name = $request->name;
+        $user->last_name = $request->lname;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->gender = $request->gender;
-        $user->dob = $request->date;
-        $user->country = $request->country;
-        try {
-            $user->save();
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['auth' => 'Email already exists']);
-        }
-
-        return redirect('/login', compact('categories'));
+        $user->save();
+        return view('save');
     }
 }

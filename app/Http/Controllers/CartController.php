@@ -1,49 +1,41 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Cart;
 use App\Models\User;
-use App\Models\Category;
 use App\Models\Product;
-use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    //
-    public function addcart(Request $request, $id){
-        $user=auth()->user();
-        $product=product::find($id);
-        $cart = new cart;
-        $cart->user_id=$user->id;
-        $cart->product_id=$product->id;
-        $cart->quantity = $request->quantity;
-        $cart->save();
-        return redirect()->back()->with('message','Product has been deleted');
-    }
 
-    public function showcart(){
-        $carts = Cart::all();
-        $categories = Category::all();
-        return view('showcart',compact('categories','carts'));
+    public function showcart()
+    {
+        $carts = Auth::user()->carts->where('transaction_id', null);
+
+        $totalPrice = 0;
+
+        if (!$carts->isEmpty()) {
+            foreach ($carts as $cart) {
+                $cart->subTotal = $cart->quantity * $cart->product->price;
+                $totalPrice += $cart->subTotal;
+            }
+        }
+        return view('cart', compact('carts', 'totalPrice'));
     }
-    public function deletecart($id){
-        $data=Cart::find($id);
+    public function delete($id)
+    {
+        $data = Cart::find($id);
         $data->delete();
-        return redirect()->back()->with('message','Success');
+        return redirect()->back()->with('message', 'Success deleted item from cart');
     }
-    public function confirmorder(Request $request){
-        $user=auth()->user();
-        $userid=$user->id;
-        $order=new transaction;
-        $order->user_id=$userid;
-        $order->save();
-        DB::table('carts')->where('user_id',$userid)->delete();
-        return redirect()->back()->with('message','Purchase Successful');
-    }
-    public function showorder($id){
-        $data=Transaction::find($id);
-        $categories = Category::all();
-        return view('history',compact('data','categories'));
+    public function purchase(){
+        $carts = Auth::user()->carts->all();
+        foreach ($carts as $cart) {
+            $cart->delete();
+        }
+        return view('checkout');
     }
 }
